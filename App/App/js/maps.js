@@ -20,13 +20,20 @@ function ToiletMapModel(elementId) {
 
     var initMap = function () {
         self.map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);
+
         self.map.setView({ center: new Microsoft.Maps.Location(50.80, 4.4), zoom: 9 });
         self.trigger("map-ready");
+
+        var loc = new Microsoft.Maps.Location(50.80, 4.4);
+        AddPin(loc);
+    }
+
+    function AddPin(loc) {
+        var pin = new Microsoft.Maps.Pushpin(loc);
+        self.map.entities.push(pin);
     }
 
     Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap });
-
-    
 
     self.on("data-completed", function (toilets) {
         console.log("muh toilets", toilets.length);

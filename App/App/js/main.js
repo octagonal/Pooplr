@@ -13,6 +13,12 @@
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
                 // TODO: This application has been newly launched. Initialize
                 // your application here.
+                var Toilets = new ToiletsModel();
+                Toilets.on("data-received", function (allToilets) {
+                    console.log("Toilets: " + allToilets.length);
+                    console.dir(allToilets);
+                })
+                Toilets.trigger("data-request");
             } else {
                 // TODO: This application has been reactivated from suspension.
                 // Restore application state here.

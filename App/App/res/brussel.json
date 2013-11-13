@@ -1,0 +1,307 @@
+[
+  {
+    "Description":"Sint-Katelijneplein",
+    "Longitude":4.348173225656183,
+    "Latitude":50.85086999386371
+  },
+  {
+    "Description":"Fontainasplein",
+    "Longitude":4.346040933065751,
+    "Latitude":50.84549088952669
+  },
+  {
+    "Description":"Rouppeplein",
+    "Longitude":4.345521926879883,
+    "Latitude":50.84283088950452
+  },
+  {
+    "Description":"Vossenplein",
+    "Longitude":4.345568911114469,
+    "Latitude":50.836464158343205
+  },
+  {
+    "Description":"Kapellestraat",
+    "Longitude":4.350575,
+    "Latitude":50.8416736
+  },
+  {
+    "Description":"Anneessensplein",
+    "Longitude":4.344749450683594,
+    "Latitude":50.843799664641736
+  },
+  {
+    "Description":"Antwerpsepoort",
+    "Longitude":4.352924823760986,
+    "Latitude":50.85655445676223
+  },
+  {
+    "Description":"Begijnhof",
+    "Longitude":4.350532293319702,
+    "Latitude":50.85242290920005
+  },
+  {
+    "Description":"Pagodenlaan",
+    "Longitude":4.356958866119385,
+    "Latitude":50.89557612783998
+  },
+  {
+    "Description":"Louizalaan",
+    "Longitude":4.372237828094512,
+    "Latitude":50.81459982546631
+  },
+  {
+    "Description":"Tielemansstraat",
+    "Longitude":4.347189193254053,
+    "Latitude":50.87626501147112
+  },
+  {
+    "Description":"Sint-Lambertusplein",
+    "Longitude":4.344438,
+    "Latitude":50.890709
+  },
+  {
+    "Description":"Hubert Stiernetstraat",
+    "Longitude":4.357945191787735,
+    "Latitude":50.876657726545126
+  },
+  {
+    "Description":"Mellerystraat",
+    "Longitude":4.356915352639817,
+    "Latitude":50.878540072598774
+  },
+  {
+    "Description":"Zuidlaan",
+    "Longitude":4.343910435581961,
+    "Latitude":50.83356535910713
+  },
+  {
+    "Description":"Margaretasquare",
+    "Longitude":4.38678503036499,
+    "Latitude":50.84716650989888
+  },
+  {
+    "Description":"Kunstenaarsstraat",
+    "Longitude":4.351019052114907,
+    "Latitude":50.880565523105176
+  },
+  {
+    "Description":"Sint-Kristoffelsstraat",
+    "Longitude":4.345877288360612,
+    "Latitude":50.84705443113164
+  },
+  {
+    "Description":"Gieterstraat",
+    "Longitude":4.343753762179631,
+    "Latitude":50.836062302146736
+  },
+  {
+    "Description":"Putterij",
+    "Longitude":4.355325312689274,
+    "Latitude":50.84530882848413
+  },
+  {
+    "Description":"Zuidstraat",
+    "Longitude":4.350845312828028,
+    "Latitude":50.84764825588486
+  },
+  {
+    "Description":"Paleizenstraat over de Bruggen",
+    "Longitude":4.360595290213041,
+    "Latitude":50.87547398988956
+  },
+  {
+    "Description":"Helihavenlaan",
+    "Longitude":4.350297822723405,
+    "Latitude":50.85785932011176
+  },
+  {
+    "Description":"Antwerpsesteenweg",
+    "Longitude":4.35598960157472,
+    "Latitude":50.86165552287591
+  },
+  {
+    "Description":"Minimenstraat",
+    "Longitude":4.351173035443139,
+    "Latitude":50.8379340057968
+  },
+  {
+    "Description":"Nieuwe Graanmarkt",
+    "Longitude":4.344632883467057,
+    "Latitude":50.85115595644862
+  },
+  {
+    "Description":"Anderlechtsepoort",
+    "Longitude": 4.338553,
+    "Latitude":50.845138
+  },
+  {
+    "Description":"Boechoutlaan",
+    "Longitude": 4.341125,
+    "Latitude":50.89472
+  },
+  {
+    "Description":"Steenkoolkaai",
+    "Longitude":4.346762248410073,
+    "Latitude":50.853945961372055
+  },
+  {
+    "Description":"Anneessens",
+    "Longitude":4.343549214680479,
+    "Latitude":50.844023222509186
+  },
+  {
+    "Description":"Beurs",
+    "Longitude":4.3491648472213455,
+    "Latitude":50.84832001733243
+  },
+  {
+    "Description":"City 2",
+    "Longitude":4.357740,
+    "Latitude":50.852742
+  },
+  {
+    "Description":"Muntcentrum",
+    "Longitude":4.353225231170654,
+    "Latitude":50.85014701520268
+  },
+  {
+    "Description":"Agora Galerij",
+    "Longitude":4.354020,
+    "Latitude":50.846387
+  },
+  {
+    "Description":"Passage 44 Galerij",
+    "Longitude":4.362792,
+    "Latitude":50.853988
+  },
+  {
+    "Description":"Sint-Gorikshallen",
+    "Longitude":4.347389,
+    "Latitude":50.847844
+  },
+  {
+    "Description":"Kraatveldlaan",
+    "Longitude":4.385626316070557,
+    "Latitude":50.89860767212878
+  },
+  {
+    "Description":"Houba de Strooperlaan",
+    "Longitude":4.337325096130371,
+    "Latitude":50.88987791458935
+  },
+  {
+    "Description":"Arthur Maesstraat",
+    "Longitude":4.4295501708984375,
+    "Latitude":50.88645323729557
+  },
+  {
+    "Description":"Pagodenlaan",
+    "Longitude":4.357259273529053,
+    "Latitude":50.895670866586286
+  },
+  {
+    "Description":"metro Zuid",
+    "Longitude":4.337961,
+    "Latitude":50.836452
+  },
+  {
+    "Description":"metro Louiza",
+    "Longitude":4.355522,
+    "Latitude":50.835650
+  },
+  {
+    "Description":"metro Rogier",
+    "Longitude":4.358314,
+    "Latitude":50.85553
+  },
+  {
+    "Description":"metro De Brouck�re",
+    "Longitude":4.351747,
+    "Latitude":50.850525
+  },
+  {
+    "Description":"station Brussel-Centraal",
+    "Longitude":4.356677,
+    "Latitude":50.845739
+  },
+  {
+    "Description":"station Brussel-Congres",
+    "Longitude":4.362364,
+    "Latitude":50.851751
+  },
+  {
+    "Description":"station Brussel-Noord",
+    "Longitude":4.360704,
+    "Latitude":50.860493
+  },
+  {
+    "Description":"station Brussel-Zuid",
+    "Longitude":4.338269233703613,
+    "Latitude":50.83609633022532
+  },
+  {
+    "Description":"parking Kruidtuin",
+    "Longitude":4.360214,
+    "Latitude":50.854701
+  },
+  {
+    "Description":"parking 58",
+    "Longitude":4.350794,
+    "Latitude":50.850812
+  },
+  {
+    "Description":"parking Albertina",
+    "Longitude":4.354810,
+    "Latitude":50.843305
+  },
+  {
+    "Description":"parking Dansaert",
+    "Longitude":4.344284,
+    "Latitude":50.850686
+  },
+  {
+    "Description":"parking Schildknaap",
+    "Longitude":4.353386,
+    "Latitude":50.849309
+  },
+  {
+    "Description":"parking Grote Markt",
+    "Longitude":4.354184,
+    "Latitude":50.846758
+  },
+  {
+    "Description":"parking Pacheco",
+    "Longitude":4.362054,
+    "Latitude":50.851509
+  },
+  {
+    "Description":"parking Hallepoort",
+    "Longitude":4.349766,
+    "Latitude":50.833758
+  },
+  {
+    "Description":"Koning Boudewijnpark",
+    "Longitude":4.32253,
+    "Latitude":50.88201
+  },
+  {
+    "Description":"Hallepoortpark",
+    "Longitude":4.34863,
+    "Latitude":50.83301
+  },
+  {
+    "Description":"Nieuwe Graanmarkt",
+    "Longitude":4.345292657008372,
+    "Latitude":50.85113994568182
+  },
+  {
+    "Description":"Park van Laken",
+    "Longitude":4.34597,
+    "Latitude":50.89070
+  },
+  {
+    "Description":"Emile Bockstaelplein",
+    "Longitude":4.346762585180613,
+    "Latitude":50.87696086747215
+  }
+]

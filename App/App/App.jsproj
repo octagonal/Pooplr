@@ -64,6 +64,7 @@
     <Content Include="css\main.css" />
     <Content Include="js\lib\jquery.js" />
     <Content Include="js\lib\jquery.plugins.js" />
+    <Content Include="res\brussel.json" />
     <None Include="App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

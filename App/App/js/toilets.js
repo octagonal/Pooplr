@@ -10,17 +10,16 @@ function BrusselsModel() {
     ///     - data-request - init collecting data
 
     var self = this;
-    var url = "http://www.brussel.be/opendatamap.cfm?idn=18&ext=CSV";
+    var url = "/res/brussel.json";
 
     self.content = [];
 
     var pull = function () {
         $.get(url, function (data) {
             if (data) {
-                if (data.openbaartoilet) {
-                    self.content = data.openbaartoilet;
-                    self.trigger("data-response", self.content);
-                }
+                if (typeof (data) != typeof ([])) data = JSON.parse(data);
+                self.content = data;
+                self.trigger("data-response", self.content);
             }
         })
     }
@@ -105,8 +104,10 @@ function ToiletsModel() {
     ///     - data-request - init collecting data
 
     var self = this;
-    var Gent = new GentModel();
-    var Antwerp = new AntwerpModel();
+
+    self.Gent = new GentModel();
+    self.Antwerp = new AntwerpModel();
+    self.Brussels = new BrusselsModel();
 
     var received = {
         gent: false,
@@ -119,7 +120,7 @@ function ToiletsModel() {
     $.observable(self);
 
     var isComplete = function() {
-        if (received.gent && received.antwerp) {
+        if (received.gent && received.antwerp && received.brussels) {
             self.trigger("data-completed", self.toilets);
             return true;
         }
@@ -128,20 +129,28 @@ function ToiletsModel() {
     self.getData = function () {
         /// <summary>Sends "data-response" events with: received{}, toilets[].</summary>
 
-        Gent.one("data-response", function (GentData) {
-            self.toilets = Gent.content.concat(Antwerp.content);
+        var combineAndComplete = function () {
+            self.toilets = self.Gent.content.concat(self.Antwerp.content, self.Brussels.content);
+            self.trigger("data-received", received, self.toilets);
+            isComplete();
+        }
+
+        self.Gent.one("data-response", function (GentData) {
             received.gent = true;
-            self.trigger("data-received", received, self.toilets);
-            isComplete();
+            combineAndComplete();
         })
-        Antwerp.one("data-response", function (AntwerpData) {
-            self.toilets = Antwerp.content.concat(Gent.content);
+        self.Antwerp.one("data-response", function (AntwerpData) {
             received.antwerp = true;
-            self.trigger("data-received", received, self.toilets);
-            isComplete();
+            combineAndComplete();
         })
-        Gent.trigger("data-request");
-        Antwerp.trigger("data-request");
+        self.Brussels.one("data-response", function (BrusselsData) {
+            received.brussels = true;
+            combineAndComplete();
+        })
+
+        self.Gent.trigger("data-request");
+        self.Antwerp.trigger("data-request");
+        self.Brussels.trigger("data-request");
     }
    
     self.on("data-request", function () {

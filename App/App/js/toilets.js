@@ -130,11 +130,15 @@ function ToiletsModel() {
 
         Gent.one("data-response", function (GentData) {
             self.toilets = Gent.content.concat(Antwerp.content);
+            received.gent = true;
             self.trigger("data-received", received, self.toilets);
+            isComplete();
         })
         Antwerp.one("data-response", function (AntwerpData) {
             self.toilets = Antwerp.content.concat(Gent.content);
+            received.antwerp = true;
             self.trigger("data-received", received, self.toilets);
+            isComplete();
         })
         Gent.trigger("data-request");
         Antwerp.trigger("data-request");

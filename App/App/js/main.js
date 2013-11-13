@@ -14,10 +14,14 @@
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
 
+                var ToiletMap = new ToiletMapModel("mapDiv");
                 Toilets.on("data-received", function (received, allToilets) {
                     console.log("Toilets: " + allToilets.length);
                     //console.dir(allToilets);
                 })
+                Toilets.on("data-completed", function (toilets) {
+                    ToiletMap.trigger("data-completed", toilets);
+                });
                 Toilets.trigger("data-request");
 
             } else {

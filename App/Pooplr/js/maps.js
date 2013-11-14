@@ -19,25 +19,30 @@ function ToiletMapModel(elementId) {
     $.observable(self);
 
     var initMap = function () {
-        console.log("Starting map...");
         self.map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);
-        console.log("map done...");
 
         self.map.setView({ center: new Microsoft.Maps.Location(50.80, 4.4), zoom: 9 });
         self.trigger("map-ready");
-
-        var loc = new Microsoft.Maps.Location(50.80, 4.4);
-        AddPin(loc);
     }
 
-    function AddPin(loc) {
+    var AddPin = function(loc) {
         var pin = new Microsoft.Maps.Pushpin(loc);
         self.map.entities.push(pin);
     }
 
+	var processToilets = function(toilets) {
+		// long,lat,distance,id,fid,objectid,situering,type_sanit,type_locat,prijs_toeg,open7op7da,openuren,idgent
+		for (var i=0; i<toilets.length;i++) {
+			var long = toilets[i].long || toilets[i].Longitude;
+			var lat = toilets[i].lat || toilets[i].Latitude;
+			var loc = new Microsoft.Maps.Location(lat, long);
+			AddPin(loc);
+		}
+	}
+
     Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap });
 
     self.on("data-completed", function (toilets) {
-        console.log("muh toilets", toilets.length);
+		processToilets(toilets);
     })
 }

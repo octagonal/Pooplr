@@ -19,7 +19,9 @@ function ToiletMapModel(elementId) {
     $.observable(self);
 
     var initMap = function () {
+        console.log("Starting map...");
         self.map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);
+        console.log("map done...");
 
         self.map.setView({ center: new Microsoft.Maps.Location(50.80, 4.4), zoom: 9 });
         self.trigger("map-ready");

@@ -3,18 +3,18 @@
 (function () {
     "use strict";
 
-    WinJS.Binding.optimizeBindingReferences = true;
-
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
-    var Toilets = new ToiletsModel();
+	var Toilets = new ToiletsModel();
 
     app.onactivated = function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
-
-                var ToiletMap = new ToiletMapModel("mapDiv");
+                // TODO: This application has been newly launched. Initialize
+                // your application here.
+				
+				var ToiletMap = new ToiletMapModel("mapDiv");
                 Toilets.on("data-received", function (received, allToilets) {
                     console.log("Toilets: " + allToilets.length);
                     //console.dir(allToilets);

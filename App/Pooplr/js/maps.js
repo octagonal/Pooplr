@@ -85,6 +85,7 @@ function ToiletMapModel(elementId) {
         console.log("closest = " + nearest, toiletLocations[n]);
     }
 
+
     var amIDoneYet = function () {
         if (hasMyLocation && allPinsPlaced) {
             findDirections();

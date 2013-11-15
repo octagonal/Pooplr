@@ -8,6 +8,7 @@
 
 	var Toilets = new ToiletsModel();
 
+
     app.onactivated = function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
@@ -15,7 +16,6 @@
                 // your application here.
 				
                 var ToiletMap = new ToiletMapModel("mapDiv");
-                var UI = new UIModel();
 
                 Toilets.on("data-received", function (received, allToilets) {
                     //console.log("Toilets: " + allToilets.length);
@@ -26,18 +26,12 @@
                 });
                 Toilets.trigger("data-request");
 
-                UI.on("appbar-click", function (what) {
-                    switch (what) {
-                        case "refresh":
-                            ToiletMap.trigger("refresh");
-                            break;
-                        case "directions":
-                            ToiletMap.trigger("directions");
-                            break;
-                        case "location":
-                            ToiletMap.trigger("location");
-                            break;
-                    }
+                document.getElementById("cmdLocation").addEventListener("click", function () {
+                    ToiletMap.trigger("location");
+                })
+
+                document.getElementById("cmdDirections").addEventListener("click", function () {
+                    ToiletMap.trigger("directions");
                 })
 
             } else {

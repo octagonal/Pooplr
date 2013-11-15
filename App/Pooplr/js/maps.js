@@ -48,6 +48,9 @@ function ToiletMapModel(elementId) {
         allPinsPlaced = false;
     var toiletLocations = [];
     var infoBox = null;
+    var ranonce = false;
+
+    var directionsManager;
 
     var mapOptions = {
       credentials: "AtnRnvtS2tavLV6OaHT3DJwmhWvOC0Vyiw4Pponx_vTLUDoOXrwwKjQvJRlZQMUb",
@@ -64,16 +67,27 @@ function ToiletMapModel(elementId) {
         })
         self.map.entities.push(infoBox);
 
+        directionsManager = new Microsoft.Maps.Directions.DirectionsManager(self.map);
+        directionsManager.setRequestOptions({
+            routeMode: Microsoft.Maps.Directions.RouteMode.walking,
+            routeDraggable: false
+        });
+
+        directionsManager.setRenderOptions({
+            waypointPushpinOptions: { visible: false },
+            viapointPushpinOptions: { visible: false }
+        });
+
         // België: 50.80, 4.4
         self.map.setView({ center: new Microsoft.Maps.Location(50.80, 4.4), zoom: 9 });
         Microsoft.Maps.Events.addHandler(self.map, 'click', displayEventInfo);
-        Microsoft.Maps.Events.addHandler(self.map, 'viewchange', hideInfobox);
         Microsoft.Maps.loadModule("Microsoft.Maps.Directions", { callback: DirectionsLoaded });
         self.trigger("map-ready");
     }
     
     function displayEventInfo(e) {
         if (e.targetType == "pushpin") {
+            if (e.target.isMe) return false;
             var point = new Microsoft.Maps.Point(e.getX(), e.getY());
             var loc = e.target
             infoBox.setLocation(e.target.getLocation());
@@ -87,6 +101,8 @@ function ToiletMapModel(elementId) {
             })
             //document.getElementById("textBox").value = loc.latitude + ", " + loc.longitude;
             console.log(loc)
+
+            if (self.myLocation) drawRoute(self.myLocation, e.target.getLocation());
         }
     }
 
@@ -128,8 +144,9 @@ function ToiletMapModel(elementId) {
 
 
     var amIDoneYet = function () {
-        if (hasMyLocation && allPinsPlaced) {
+        if (hasMyLocation && allPinsPlaced && !ranonce) {
             findDirections();
+            ranonce = true;
         }
     }
 
@@ -142,8 +159,9 @@ function ToiletMapModel(elementId) {
             var pin = new Microsoft.Maps.Pushpin(loc, {
                 icon: '/images/me48.png',
                 width: 23, height: 48,
-                draggable: true
+                draggable: false
             });
+            pin.isMe = true;
             self.map.entities.push(pin);
 
             self.myLocation = loc;
@@ -169,8 +187,19 @@ function ToiletMapModel(elementId) {
 	}
 
 	var drawRoute = function (locSelf, locClosest) {
+	    directionsManager.resetDirections();
+	    directionsManager.clearDisplay();
 
-	    directionsManager = new Microsoft.Maps.Directions.DirectionsManager(self.map);
+	    directionsManager.setRequestOptions({
+	        routeMode: Microsoft.Maps.Directions.RouteMode.walking,
+	        routeDraggable: false
+	    });
+
+	    directionsManager.setRenderOptions({
+	        waypointPushpinOptions: { visible: false },
+	        viapointPushpinOptions: { visible: false }
+	    });
+
 
 	    // Create start and end waypoints
 	    var startWaypoint = new Microsoft.Maps.Directions.Waypoint({ location: locSelf });
@@ -204,5 +233,32 @@ function ToiletMapModel(elementId) {
 
     self.on("closest-found", function () {
         drawRoute(self.myLocation,self.closestLocation);
+    })
+
+    self.on("directions", function () {
+        drawRoute(self.myLocation, self.closestLocation);
+        infoBox.setOptions({
+            visible: false
+        })
+    })
+
+    self.on("location", function () {
+        loc = new Windows.Devices.Geolocation.Geolocator();
+        loc.getGeopositionAsync().then(getCurrentLocationHandler, errorHandler);
+
+        function getCurrentLocationHandler(pos) {
+            var loc = new Microsoft.Maps.Location(pos.coordinate.latitude, pos.coordinate.longitude);
+            var pin = new Microsoft.Maps.Pushpin(loc, {
+                icon: '/images/me48.png',
+                width: 23, height: 48,
+                draggable: true
+            });
+            self.map.entities.push(pin);
+
+            self.myLocation = loc;
+            hasMyLocation = true;
+            amIDoneYet();
+        }
+        function errorHandler(e) { console.log("Err =>" + e.message); }
     })
 }

@@ -17,19 +17,18 @@
     <script type="text/javascript" src="ms-appx:///Bing.Maps.JavaScript//js/veapimodules.js"></script>
     <script src="/js/toilets.js"></script>
     <script src="/js/maps.js"></script>
-    <script src="/js/ui.js"></script>
-    <script src="/js/default.js"></script>
+
 </head>
 <body role="application">
 	<div id="rootGrid">
         <div id="content">
             <div id="mapDiv"></div>
             <div id="AppBar" data-win-control="WinJS.UI.AppBar" data-win-options="">
-                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdDirections',label:'Find Nearest Toilet',icon:'directions',section:'global',tooltip:'Find Directions to the nearest toilet'}"></button>
-
-                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdLocation',label:'Find My Location',icon:'world',section:'selection',tooltip:'Refresh Location'}"></button>
+                <button id="cmdDirections" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdDirections',label:'Find Nearest Toilet',icon:'directions',section:'global',tooltip:'Find Directions to the nearest toilet'}"></button>
+                <button id="cmdLocation" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdLocation',label:'Find My Location',icon:'world',section:'selection',tooltip:'Refresh Location'}"></button>
             </div>
         </div>
     </div>
+    <script src="/js/default.js"></script>
 </body>
 </html>

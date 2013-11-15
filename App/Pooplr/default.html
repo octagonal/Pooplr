@@ -17,9 +17,16 @@
     <script type="text/javascript" src="ms-appx:///Bing.Maps.JavaScript//js/veapimodules.js"></script>
     <script src="/js/toilets.js"></script>
     <script src="/js/maps.js"></script>
+	<script src="/js/ui.js"></script>
     <script src="/js/default.js"></script>
 </head>
-<body>
-    <div id="mapDiv"></div>
+<body role="application">
+	<div id="rootGrid">
+        <div id="header" role="contentinfo" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/html/header.html'}"></div>
+        <div id="content">
+            <div id="mapDiv"></div>
+        </div>
+        <div id="footer" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/html/footer.html'}"></div>
+    </div>
 </body>
 </html>

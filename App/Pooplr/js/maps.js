@@ -1,4 +1,34 @@
 ﻿
+function checkDistance(me, marker) {
+    // x = LAT || y = LONG
+    var lat1 = me.lat;
+    var lon1 = me.lon;
+
+    var lat2 = marker.lat;
+    var lon2 = marker.long;
+
+    var earthRadius = 3958.75; // radius of the eath in meters
+    lat1 = (lat1 * Math.PI) / 180;
+    lon1 = (lon1 * Math.PI) / 180;
+    lat2 = (lat2 * Math.PI) / 180;
+    lon2 = (lon2 * Math.PI) / 180;
+
+    var dlon = lon2 - lon1;
+    var dlat = lat2 - lat1;
+
+    var a = Math.sin(dlat / 2) * Math.sin(dlat / 2) +
+			Math.cos(lat1) * Math.cos(lat2) *
+			Math.sin(dlon / 2) * Math.sin(dlon / 2);
+
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var meterConversion = 1609;
+    var distance = earthRadius * c * meterConversion;
+
+    return distance;
+}
+
+
+
 function ToiletMapModel(elementId) {
     /// <summary>Toilet Map</summary>
 
@@ -31,6 +61,7 @@ function ToiletMapModel(elementId) {
         var pin = new Microsoft.Maps.Pushpin(loc);
         self.map.entities.push(pin);
     }
+
 
     function DirectionsLoaded() {
         loc = new Windows.Devices.Geolocation.Geolocator();

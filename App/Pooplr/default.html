@@ -17,7 +17,7 @@
     <script type="text/javascript" src="ms-appx:///Bing.Maps.JavaScript//js/veapimodules.js"></script>
     <script src="/js/toilets.js"></script>
     <script src="/js/maps.js"></script>
-	<script src="/js/ui.js"></script>
+    <script src="/js/ui.js"></script>
     <script src="/js/default.js"></script>
 </head>
 <body role="application">
@@ -26,12 +26,17 @@
         <div id="content">
             <div id="NavBar" data-win-control="WinJS.UI.NavBar">
                 <div data-win-control="WinJS.UI.NavBarContainer">
-                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favorite', icon: 'favorite' }"></div>
-                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Your account', icon: 'people' }"></div>
-                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings' }"></div>
+                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Toilets', icon: '/images/icon.png' }"></div>
                 </div>
             </div> 
             <div id="mapDiv"></div>
+            <div id="AppBar" data-win-control="WinJS.UI.AppBar" data-win-options="">
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdRefresh',label:'Find Toilets',icon:'mappin',section:'global',tooltip:'Refresh Toilets List'}"></button>
+                <hr data-win-control="WinJS.UI.AppBarCommand" data-win-options="{type:'separator',section:'global'}" />
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdDirections',label:'Directions',icon:'directions',section:'global',tooltip:'Find Directions to the nearest toilet'}"></button>
+
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdLocation',label:'Location',icon:'world',section:'selection',tooltip:'Refresh Location'}"></button>
+            </div>
         </div>
         <div id="footer" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/html/footer.html'}"></div>
     </div>

@@ -14,7 +14,9 @@
                 // TODO: This application has been newly launched. Initialize
                 // your application here.
 				
-				var ToiletMap = new ToiletMapModel("mapDiv");
+                var ToiletMap = new ToiletMapModel("mapDiv");
+                var UI = new UIModel();
+
                 Toilets.on("data-received", function (received, allToilets) {
                     //console.log("Toilets: " + allToilets.length);
                     //console.dir(allToilets);

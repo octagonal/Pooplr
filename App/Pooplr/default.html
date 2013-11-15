@@ -24,18 +24,11 @@
 	<div id="rootGrid">
         <div id="header" role="contentinfo" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/html/header.html'}"></div>
         <div id="content">
-            <div id="NavBar" data-win-control="WinJS.UI.NavBar">
-                <div data-win-control="WinJS.UI.NavBarContainer">
-                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Toilets', icon: 'maps' }"></div>
-                </div>
-            </div> 
             <div id="mapDiv"></div>
             <div id="AppBar" data-win-control="WinJS.UI.AppBar" data-win-options="">
-                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdRefresh',label:'Find Toilets',icon:'mappin',section:'global',tooltip:'Refresh Toilets List'}"></button>
-                <hr data-win-control="WinJS.UI.AppBarCommand" data-win-options="{type:'separator',section:'global'}" />
-                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdDirections',label:'Directions',icon:'directions',section:'global',tooltip:'Find Directions to the nearest toilet'}"></button>
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdDirections',label:'Find Nearest Toilet',icon:'directions',section:'global',tooltip:'Find Directions to the nearest toilet'}"></button>
 
-                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdLocation',label:'Location',icon:'world',section:'selection',tooltip:'Refresh Location'}"></button>
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdLocation',label:'Find My Location',icon:'world',section:'selection',tooltip:'Refresh Location'}"></button>
             </div>
         </div>
         <div id="footer" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/html/footer.html'}"></div>

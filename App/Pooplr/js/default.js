@@ -26,6 +26,20 @@
                 });
                 Toilets.trigger("data-request");
 
+                UI.on("appbar-click", function (what) {
+                    switch (what) {
+                        case "refresh":
+                            ToiletMap.trigger("refresh");
+                            break;
+                        case "directions":
+                            ToiletMap.trigger("directions");
+                            break;
+                        case "location":
+                            ToiletMap.trigger("location");
+                            break;
+                    }
+                })
+
             } else {
                 // TODO: This application has been reactivated from suspension.
                 // Restore application state here.

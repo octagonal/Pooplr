@@ -17,17 +17,6 @@ function UIModel() {
 
     $.observable(self);
 
-    var navbarInvoked = function (ev) {
-        var navbarCommand = ev.detail.navbarCommand;
-        self.trigger("navbar-invoked", navbarCommand.label);
-        document.querySelector('select').focus();
-    }
-
-    $('#NavBar').on('invoked', navbarInvoked);
-
-    $("#AppBar #cmdRefresh").on("click", function () {
-        self.trigger("appbar-click", "refresh");
-    })
     $("#AppBar #cmdDirections").on("click", function () {
         self.trigger("appbar-click", "directions");
     })

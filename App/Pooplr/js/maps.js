@@ -22,6 +22,7 @@ function ToiletMapModel(elementId) {
         self.map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);
 
         self.map.setView({ center: new Microsoft.Maps.Location(50.80, 4.4), zoom: 9 });
+        Microsoft.Maps.loadModule("Microsoft.Maps.Directions", { callback: DirectionsLoaded });
         self.trigger("map-ready");
     }
 
@@ -30,18 +31,19 @@ function ToiletMapModel(elementId) {
         self.map.entities.push(pin);
     }
 
-    //Geolocation
-	loc = new Windows.Devices.Geolocation.Geolocator();
-	loc.getGeopositionAsync().then(getCurrentLocationHandler, errorHandler);
-	
-	function getCurrentLocationHandler(pos) {
-	   var loc = new Microsoft.Maps.Location(pos.coordinate.latitude, pos.coordinate.longitude);
-	   var pin = new Microsoft.Maps.Pushpin(loc);
-	   self.map.entities.push(pin);
-    }
+    function DirectionsLoaded() {
+        loc = new Windows.Devices.Geolocation.Geolocator();
+        loc.getGeopositionAsync().then(getCurrentLocationHandler, errorHandler);
 
-	function errorHandler(e){ console.log("Err =>" + e.message);}
-    //Geolocation
+        function getCurrentLocationHandler(pos) {
+            var loc = new Microsoft.Maps.Location(pos.coordinate.latitude, pos.coordinate.longitude);
+            var pin = new Microsoft.Maps.Pushpin(loc);
+            self.map.entities.push(pin);
+        }
+
+        function errorHandler(e) { console.log("Err =>" + e.message); }
+        //Geolocation
+    }
 
 	var processToilets = function(toilets) {
 		// long,lat,distance,id,fid,objectid,situering,type_sanit,type_locat,prijs_toeg,open7op7da,openuren,idgent

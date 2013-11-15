@@ -50,9 +50,9 @@ function ToiletMapModel(elementId) {
 
     var mapOptions = {
       credentials: "AtnRnvtS2tavLV6OaHT3DJwmhWvOC0Vyiw4Pponx_vTLUDoOXrwwKjQvJRlZQMUb",
-      showBreadcrumb: true,
+      showBreadcrumb: false,
       fixedMapPosition: true,
-      showMapTypeSelector: false
+      showMapTypeSelector: true
     };
     $.observable(self);
 
@@ -61,10 +61,20 @@ function ToiletMapModel(elementId) {
 
         // België: 50.80, 4.4
         self.map.setView({ center: new Microsoft.Maps.Location(50.80, 4.4), zoom: 9 });
+        Microsoft.Maps.Events.addHandler(self.map, 'click', displayEventInfo);
         Microsoft.Maps.loadModule("Microsoft.Maps.Directions", { callback: DirectionsLoaded });
         self.trigger("map-ready");
     }
     
+    function displayEventInfo(e) {
+        if (e.targetType == "pushpin") {
+            var point = new Microsoft.Maps.Point(e.getX(), e.getY());
+            var loc = e.target
+            //document.getElementById("textBox").value = loc.latitude + ", " + loc.longitude;
+            console.log(loc)
+        }
+    }
+
     var AddPin = function(loc,toilet) {
         var pin = new Microsoft.Maps.Pushpin(loc, {
             icon: '/images/icon32.png',
@@ -72,6 +82,7 @@ function ToiletMapModel(elementId) {
             width: 32, height: 32,
             draggable: false
         });
+       
         self.map.entities.push(pin);
     }
 

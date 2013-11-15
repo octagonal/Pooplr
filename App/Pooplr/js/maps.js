@@ -39,7 +39,7 @@ function ToiletMapModel(elementId) {
        console.log(pos.coordinate.longitude);
     }
 
-	function errorHandler(e){ console.log(e.message);}
+	function errorHandler(e){ console.log("Err =>" + e.message);}
 
 	//console.log(loc.locationStatus);
 	//displayAlert('Current location set, based on your browser support for geo location API');

@@ -47,6 +47,7 @@ function ToiletMapModel(elementId) {
     var hasMyLocation = false,
         allPinsPlaced = false;
     var toiletLocations = [];
+    var infoBox = null;
 
     var mapOptions = {
       credentials: "AtnRnvtS2tavLV6OaHT3DJwmhWvOC0Vyiw4Pponx_vTLUDoOXrwwKjQvJRlZQMUb",
@@ -58,10 +59,15 @@ function ToiletMapModel(elementId) {
 
     var initMap = function () {
         self.map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);
+        infoBox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0, 0), {
+            visible: false
+        })
+        self.map.entities.push(infoBox);
 
         // België: 50.80, 4.4
         self.map.setView({ center: new Microsoft.Maps.Location(50.80, 4.4), zoom: 9 });
         Microsoft.Maps.Events.addHandler(self.map, 'click', displayEventInfo);
+        Microsoft.Maps.Events.addHandler(self.map, 'viewchange', hideInfobox);
         Microsoft.Maps.loadModule("Microsoft.Maps.Directions", { callback: DirectionsLoaded });
         self.trigger("map-ready");
     }
@@ -70,6 +76,15 @@ function ToiletMapModel(elementId) {
         if (e.targetType == "pushpin") {
             var point = new Microsoft.Maps.Point(e.getX(), e.getY());
             var loc = e.target
+            infoBox.setLocation(e.target.getLocation());
+            var title = "";
+            if (e.target.Title && e.target.Title.length > 1) {
+                title = e.target.Title;
+            } else { title = "Openbaar toilet"; }
+            infoBox.setOptions({
+                visible: true,
+                title: title
+            })
             //document.getElementById("textBox").value = loc.latitude + ", " + loc.longitude;
             console.log(loc)
         }
@@ -78,39 +93,19 @@ function ToiletMapModel(elementId) {
     var AddPin = function(loc,toilet) {
         var pin = new Microsoft.Maps.Pushpin(loc, {
             icon: '/images/icon32.png',
-            //text: toilet.omschrijving || toilet.situering ||toilet.Description,
             width: 32, height: 32,
             draggable: false,
         });
-       
-        pinInfobox = new Microsoft.Maps.Infobox(
-            loc,
-            {
-            title: toilet.omschrijving || toilet.situering ||toilet.Description, 
-            visible: false
-            }
-        );
 
-        Microsoft.Maps.Events.addHandler(pin, 'click', displayInfobox);
-
-        // Hide the info box when the map is moved.
-        Microsoft.Maps.Events.addHandler(self.map, 'viewchange', hideInfobox);
-
+        pin.Title = toilet.omschrijving || toilet.situering || toilet.Description;
+ 
         // Add the pushpin and info box to the map
-        self.map.entities.push(pinInfobox);
         self.map.entities.push(pin);
     }
 
-    function displayInfobox(e)
-    {
-        console.log(e);
-        pinInfobox.setOptions({ visible:true });
-    }
-                    
-
     function hideInfobox(e)
     {
-        pinInfobox.setOptions({ visible: false });
+        infoBox.setOptions({ visible: false });
     }
 
     var findDirections = function () {

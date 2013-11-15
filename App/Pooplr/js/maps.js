@@ -66,7 +66,12 @@ function ToiletMapModel(elementId) {
     }
 
     var AddPin = function(loc,toilet) {
-        var pin = new Microsoft.Maps.Pushpin(loc, { icon: '/images/icon.png', text: toilet.omschrijving, width: 30, height: 30, draggable: false });
+        var pin = new Microsoft.Maps.Pushpin(loc, {
+            icon: '/images/icon24.png',
+            text: toilet.omschrijving || toilet.situering ||toilet.Description,
+            width: 24, height: 24,
+            draggable: false
+        });
         self.map.entities.push(pin);
     }
 

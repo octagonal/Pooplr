@@ -56,8 +56,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="default.html" />
-    <Content Include="html\footer.html" />
-    <Content Include="html\header.html" />
     <Content Include="images\icon.png" />
     <Content Include="images\icon24.png" />
     <Content Include="images\icon32.png" />

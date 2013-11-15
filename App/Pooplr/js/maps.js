@@ -42,6 +42,7 @@ function ToiletMapModel(elementId) {
     var self = this;
 
     self.myLocation = null;
+    self.closestLocation = null;
 
     var hasMyLocation = false,
         allPinsPlaced = false;
@@ -65,7 +66,7 @@ function ToiletMapModel(elementId) {
     }
 
     var AddPin = function(loc) {
-        var pin = new Microsoft.Maps.Pushpin(loc);
+        var pin = new Microsoft.Maps.Pushpin(loc, { icon: '/images/icon.png', width: 50, height: 50, draggable: false });
         self.map.entities.push(pin);
     }
 
@@ -83,6 +84,8 @@ function ToiletMapModel(elementId) {
             }
         }
         console.log("closest = " + nearest, toiletLocations[n]);
+        self.closestLocation = toiletLocations[n]
+        self.trigger("closest-found");
     }
 
 
@@ -123,9 +126,18 @@ function ToiletMapModel(elementId) {
 		amIDoneYet();
 	}
 
+	var drawRoute = function (locSelf, locClosest) {
+	    console.log(locSelf);
+	    console.log(locClosest);
+	}
+
     Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap });
 
     self.on("data-completed", function (toilets) {
 		processToilets(toilets);
+    })
+
+    self.on("closest-found", function () {
+        drawRoute(self.myLocation,self.closestLocation);
     })
 }

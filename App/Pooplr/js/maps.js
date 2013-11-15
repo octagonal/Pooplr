@@ -1,11 +1,12 @@
 ﻿
 function checkDistance(me, marker) {
     // x = LAT || y = LONG
-    var lat1 = me.lat;
-    var lon1 = me.lon;
 
-    var lat2 = marker.lat;
-    var lon2 = marker.long;
+    var lat1 = me.latitude;
+    var lon1 = me.longitude;
+
+    var lat2 = marker.latitude;
+    var lon2 = marker.longitude;
 
     var earthRadius = 3958.75; // radius of the eath in meters
     lat1 = (lat1 * Math.PI) / 180;
@@ -40,6 +41,12 @@ function ToiletMapModel(elementId) {
 
     var self = this;
 
+    self.myLocation = null;
+
+    var hasMyLocation = false,
+        allPinsPlaced = false;
+    var toiletLocations = [];
+
     var mapOptions = {
       credentials: "AtnRnvtS2tavLV6OaHT3DJwmhWvOC0Vyiw4Pponx_vTLUDoOXrwwKjQvJRlZQMUb",
       showBreadcrumb: true,
@@ -62,6 +69,27 @@ function ToiletMapModel(elementId) {
         self.map.entities.push(pin);
     }
 
+    var findDirections = function () {
+        console.log("looking for nearest");
+
+        var nearest = 99999999999;
+        var n = -1;
+        for (var i = 0; i < toiletLocations.length; i++) {
+            var currentToilet = toiletLocations[i];
+            var distance = checkDistance(self.myLocation, currentToilet);
+            if (distance < nearest) {
+                nearest = distance;
+                n = i;
+            }
+        }
+        console.log("closest = " + nearest, toiletLocations[n]);
+    }
+
+    var amIDoneYet = function () {
+        if (hasMyLocation && allPinsPlaced) {
+            findDirections();
+        }
+    }
 
     function DirectionsLoaded() {
         loc = new Windows.Devices.Geolocation.Geolocator();
@@ -71,6 +99,10 @@ function ToiletMapModel(elementId) {
             var loc = new Microsoft.Maps.Location(pos.coordinate.latitude, pos.coordinate.longitude);
             var pin = new Microsoft.Maps.Pushpin(loc);
             self.map.entities.push(pin);
+
+            self.myLocation = loc;
+            hasMyLocation = true;
+            amIDoneYet();
         }
 
         function errorHandler(e) { console.log("Err =>" + e.message); }
@@ -83,8 +115,11 @@ function ToiletMapModel(elementId) {
 			var long = toilets[i].long || toilets[i].Longitude;
 			var lat = toilets[i].lat || toilets[i].Latitude;
 			var loc = new Microsoft.Maps.Location(lat, long);
+			toiletLocations[toiletLocations.length] = loc;
 			AddPin(loc);
 		}
+		allPinsPlaced = true;
+		amIDoneYet();
 	}
 
     Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap });

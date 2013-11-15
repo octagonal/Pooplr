@@ -106,7 +106,11 @@ function ToiletMapModel(elementId) {
 
         function getCurrentLocationHandler(pos) {
             var loc = new Microsoft.Maps.Location(pos.coordinate.latitude, pos.coordinate.longitude);
-            var pin = new Microsoft.Maps.Pushpin(loc);
+            var pin = new Microsoft.Maps.Pushpin(loc, {
+                icon: '/images/me48.png',
+                width: 23, height: 48,
+                draggable: true
+            });
             self.map.entities.push(pin);
 
             self.myLocation = loc;
@@ -132,28 +136,30 @@ function ToiletMapModel(elementId) {
 	}
 
 	var drawRoute = function (locSelf, locClosest) {
-	    console.log(locSelf);
-	    console.log(locClosest);
 
-	    var startWaypoint = new Microsoft.Maps.Directions.Waypoint("Seattle, WA");
-	    var endWaypoint = new Microsoft.Maps.Directions.Waypoint("Portland, OR");
+	    directionsManager = new Microsoft.Maps.Directions.DirectionsManager(self.map);
 
-	    var waypoints = new Microsoft.Maps.Directions.WaypointCollection();
-	    waypoints.Add(startWaypoint);
-	    waypoints.Add(endWaypoint);
+	    // Create start and end waypoints
+	    var startWaypoint = new Microsoft.Maps.Directions.Waypoint({ location: locSelf });
+	    var endWaypoint = new Microsoft.Maps.Directions.Waypoint({ location: locClosest });
 
-	    var directionsManager = self.map.DirectionsManager;
-	    directionsManager.Waypoints = waypoints;
+	    directionsManager.addWaypoint(startWaypoint);
+	    directionsManager.addWaypoint(endWaypoint);
 
-	    // Calculate route directions
-	    directionsManager.CalculateDirectionsAsync().then(showRoutePath);
-	    //loc.getGeopositionAsync().then(getCurrentLocationHandler, errorHandler);
+	    // Set the id of the div to use to display the directions
+	    //directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('itineraryDiv') });
 
+	    // Specify a handler for when an error and success occurs
+	    Microsoft.Maps.Events.addHandler(directionsManager, 'directionsError', displayError);
 
-	    // Display the route on the map
-	    function showRoutePath(res) {
-	        res.Routes[0];
-	    }
+	    // Calculate directions, which displays a route on the map
+	    directionsManager.calculateDirections();
+
+	}
+
+	function displayError(e) {
+	    // Display the error message
+	    alert(e.message);
 
 	}
 

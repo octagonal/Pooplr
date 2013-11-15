@@ -21,6 +21,7 @@ function ToiletMapModel(elementId) {
     var initMap = function () {
         self.map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), mapOptions);
 
+        // België: 50.80, 4.4
         self.map.setView({ center: new Microsoft.Maps.Location(50.80, 4.4), zoom: 9 });
         Microsoft.Maps.loadModule("Microsoft.Maps.Directions", { callback: DirectionsLoaded });
         self.trigger("map-ready");

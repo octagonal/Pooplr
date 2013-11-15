@@ -65,8 +65,8 @@ function ToiletMapModel(elementId) {
         self.trigger("map-ready");
     }
 
-    var AddPin = function(loc) {
-        var pin = new Microsoft.Maps.Pushpin(loc, { icon: '/images/icon.png', width: 50, height: 50, draggable: false });
+    var AddPin = function(loc,toilet) {
+        var pin = new Microsoft.Maps.Pushpin(loc, { icon: '/images/icon.png', text: toilet.omschrijving, width: 30, height: 30, draggable: false });
         self.map.entities.push(pin);
     }
 
@@ -120,7 +120,7 @@ function ToiletMapModel(elementId) {
 			var lat = toilets[i].lat || toilets[i].Latitude;
 			var loc = new Microsoft.Maps.Location(lat, long);
 			toiletLocations[toiletLocations.length] = loc;
-			AddPin(loc);
+			AddPin(loc,toilets[i]);
 		}
 		allPinsPlaced = true;
 		amIDoneYet();

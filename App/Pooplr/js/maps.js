@@ -64,12 +64,12 @@ function ToiletMapModel(elementId) {
         Microsoft.Maps.loadModule("Microsoft.Maps.Directions", { callback: DirectionsLoaded });
         self.trigger("map-ready");
     }
-
+    
     var AddPin = function(loc,toilet) {
         var pin = new Microsoft.Maps.Pushpin(loc, {
-            icon: '/images/icon24.png',
+            icon: '/images/icon32.png',
             text: toilet.omschrijving || toilet.situering ||toilet.Description,
-            width: 24, height: 24,
+            width: 32, height: 32,
             draggable: false
         });
         self.map.entities.push(pin);
@@ -134,6 +134,27 @@ function ToiletMapModel(elementId) {
 	var drawRoute = function (locSelf, locClosest) {
 	    console.log(locSelf);
 	    console.log(locClosest);
+
+	    var startWaypoint = new Microsoft.Maps.Directions.Waypoint("Seattle, WA");
+	    var endWaypoint = new Microsoft.Maps.Directions.Waypoint("Portland, OR");
+
+	    var waypoints = new Microsoft.Maps.Directions.WaypointCollection();
+	    waypoints.Add(startWaypoint);
+	    waypoints.Add(endWaypoint);
+
+	    var directionsManager = self.map.DirectionsManager;
+	    directionsManager.Waypoints = waypoints;
+
+	    // Calculate route directions
+	    directionsManager.CalculateDirectionsAsync().then(showRoutePath);
+	    //loc.getGeopositionAsync().then(getCurrentLocationHandler, errorHandler);
+
+
+	    // Display the route on the map
+	    function showRoutePath(res) {
+	        res.Routes[0];
+	    }
+
 	}
 
     Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap });

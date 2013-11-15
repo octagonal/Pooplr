@@ -30,6 +30,20 @@ function ToiletMapModel(elementId) {
         self.map.entities.push(pin);
     }
 
+	//map.entities.clear(); 
+	loc = new Windows.Devices.Geolocation.Geolocator();
+	loc.getGeopositionAsync().then(getPositionHandler, errorHandler);
+	
+	function getPositionHandler(pos) {
+       console.log(pos.coordinate.latitude);
+       console.log(pos.coordinate.longitude);
+    }
+
+	function errorHandler(e){ console.log(e.message);}
+
+	//console.log(loc.locationStatus);
+	//displayAlert('Current location set, based on your browser support for geo location API');
+
 	var processToilets = function(toilets) {
 		// long,lat,distance,id,fid,objectid,situering,type_sanit,type_locat,prijs_toeg,open7op7da,openuren,idgent
 		for (var i=0; i<toilets.length;i++) {

@@ -78,12 +78,39 @@ function ToiletMapModel(elementId) {
     var AddPin = function(loc,toilet) {
         var pin = new Microsoft.Maps.Pushpin(loc, {
             icon: '/images/icon32.png',
-            text: toilet.omschrijving || toilet.situering ||toilet.Description,
+            //text: toilet.omschrijving || toilet.situering ||toilet.Description,
             width: 32, height: 32,
-            draggable: false
+            draggable: false,
         });
        
+        pinInfobox = new Microsoft.Maps.Infobox(
+            loc,
+            {
+            title: toilet.omschrijving || toilet.situering ||toilet.Description, 
+            visible: false
+            }
+        );
+
+        Microsoft.Maps.Events.addHandler(pin, 'click', displayInfobox);
+
+        // Hide the info box when the map is moved.
+        Microsoft.Maps.Events.addHandler(self.map, 'viewchange', hideInfobox);
+
+        // Add the pushpin and info box to the map
+        self.map.entities.push(pinInfobox);
         self.map.entities.push(pin);
+    }
+
+    function displayInfobox(e)
+    {
+        console.log(e);
+        pinInfobox.setOptions({ visible:true });
+    }
+                    
+
+    function hideInfobox(e)
+    {
+        pinInfobox.setOptions({ visible: false });
     }
 
     var findDirections = function () {

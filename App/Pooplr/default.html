@@ -24,6 +24,13 @@
 	<div id="rootGrid">
         <div id="header" role="contentinfo" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/html/header.html'}"></div>
         <div id="content">
+            <div id="NavBar" data-win-control="WinJS.UI.NavBar">
+                <div data-win-control="WinJS.UI.NavBarContainer">
+                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favorite', icon: 'favorite' }"></div>
+                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Your account', icon: 'people' }"></div>
+                    <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings' }"></div>
+                </div>
+            </div> 
             <div id="mapDiv"></div>
         </div>
         <div id="footer" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/html/footer.html'}"></div>
